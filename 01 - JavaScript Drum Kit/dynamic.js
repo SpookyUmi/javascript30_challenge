@@ -1,39 +1,23 @@
-/* let toggleNavButton = document.querySelector('.togglenav');
-toggleNavButton.addEventListener('click', () => {
-  document.querySelector('#menu').classList.toggle('open')
-}) */
+const keys = document.querySelectorAll('.key');
 
-//(event.key === 'a')
-
-const key = document.querySelector('.key');
-
-/* function pressKey(event) {
-  if (event.type === 'click' || event.code === 'KeyA') {
-    console.log('You clicked the A');
-  }
-} */
-
-/* function handlePhotoClick(event) {
-  if (event.type === 'click' || event.key === 'Enter') {
-    console.log('you clicked the A');
-  }
+function togglePlaying(key) {
+  key.classList.toggle('playing');
+  const localKeyClasses = key.classList;
+  setTimeout(() => {
+    localKeyClasses.remove('playing')
+  }, 100);
+  playAudio(key.dataset.key);
 }
 
-transformButton.addEventListener('keyup', handlePhotoClick);
-transformButton.addEventListener('click', handlePhotoClick); */
-
-/* key.addEventListener('keydown', () => {
-  document.querySelector('.key').classList.add('playing')
-})
-
-key.addEventListener('click', () => {
-  document.querySelector('.key').classList.add('playing')
-}) */
-
-function pressKey(event) {
-  if (event.code === 'KeyA'){
-    key.classList.toggle('playing');
-  }
+function playAudio(number) {
+  const audioFile = document.querySelector(`audio[data-key = "${number}"]`)
+  audioFile.play();
 }
 
-key.addEventListener('keydown', pressKey);
+document.addEventListener('keydown', event => {
+    keys.forEach(key => {
+      if (event.keyCode == key.dataset.key) {
+        togglePlaying(key);
+      }
+    });
+});
