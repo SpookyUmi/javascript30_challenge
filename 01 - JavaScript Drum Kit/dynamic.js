@@ -9,9 +9,10 @@ function togglePlaying(key) {
   playAudio(key.dataset.key);
 }
 
-function playAudio(number) {
-  const audioFile = document.querySelector(`audio[data-key = "${number}"]`)
+function playAudio(keyCode) {
+  const audioFile = document.querySelector(`audio[data-key = "${keyCode}"]`)
   audioFile.play();
+  audioFile.currentTime = 0;
 }
 
 document.addEventListener('keydown', event => {
