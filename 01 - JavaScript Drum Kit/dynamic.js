@@ -11,8 +11,8 @@ function togglePlaying(key) {
 
 function playAudio(keyCode) {
   const audioFile = document.querySelector(`audio[data-key = "${keyCode}"]`)
-  audioFile.play();
   audioFile.currentTime = 0;
+  audioFile.play();
 }
 
 document.addEventListener('keydown', event => {
