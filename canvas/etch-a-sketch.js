@@ -1,19 +1,24 @@
 // Select the elements on the page - canvas, shake button
 const shake = document.querySelector('.shake');
-const canvas = document.getElementById('etch-a-sketch');
+const canvas = document.querySelector('#etch-a-sketch');
 const ctx = canvas.getContext('2d');
+const { width, height } = canvas;
 
 // Setup our canvas for drawing
-let x = 150;
-let y = 150;
+
+let x = Math.floor(Math.random() * width);
+let y = Math.floor(Math.random() * height);
+let hue = 0;
 
 // write a draw function
 
 function drawTheLine(xStart, yStart, xEnd, yEnd) {
+  hue += 5;
   ctx.beginPath();
-  ctx.strokeStyle = '#8E4585';
-  ctx.lineWidth = 10;
+  ctx.lineWidth = 50;
   ctx.lineJoin = 'round';
+  ctx.lineCap = 'round';
+  ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
   ctx.moveTo(xStart, yStart);
   ctx.lineTo(xEnd, yEnd);
   ctx.stroke();
@@ -29,7 +34,8 @@ const key = {
 };
 
 function keyDown(event) {
-  const moveAmount = 4;
+  const moveAmount = 20;
+  event.preventDefault();
 
   switch (event.keyCode) {
     case key.up:
@@ -51,9 +57,8 @@ function keyDown(event) {
       drawTheLine(x, y, x + moveAmount, y);
       x += moveAmount;
       break;
-
     default:
-      console.log(x, y);
+      break;
   }
   console.log(x, y);
 }
