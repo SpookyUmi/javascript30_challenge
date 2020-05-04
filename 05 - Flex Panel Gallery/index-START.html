@@ -151,18 +151,20 @@
     const panels = document.querySelectorAll('.panel')
     console.log(panels)
 
+
     function toggleOpen(event) {
-      console.log(event)
-      event.target.classList.toggle('open');
+      console.log(event);
+      event.currentTarget.classList.toggle('open');
     };
 
-
-    function toggleActive(event) {
-      event.target.classList.toggle('open-active');
+    function toggleActive(e) {
+      if (e.propertyName.includes('flex')) {
+        e.currentTarget.classList.toggle('open-active');
+      }
     };
 
     panels.forEach(panel => panel.addEventListener('click', toggleOpen));
-    panels.forEach(panel => panel.addEventListener('click', toggleActive));
+    panels.forEach(panel => panel.addEventListener('transitionend', toggleActive));
 
   </script>
 
